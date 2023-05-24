@@ -22,17 +22,17 @@ public class SolitaireGame {
         clubFoundation = new Foundation("club");
         spadeFoundation = new Foundation("spade");
         //generate a full deck of cards
-        ArrayList<Card> organizedDeck = new ArrayList<>();
+        ArrayList<Card> orderedDeck = new ArrayList<>();
         for (int i = 1; i <= 4; i ++){
             String suit;
             if (i == 1){
-                suit = "♦";
+                suit = "D";
             } else if (i == 2){
-                suit = "";
+                suit = "H";
             } else if (i == 3){
-                suit = "";
+                suit = "C";
             } else {
-                suit = "";
+                suit = "S";
             }
             String value;
 
@@ -46,23 +46,29 @@ public class SolitaireGame {
                 } else if (j == 13){
                     value = "K";
                 } else {
-                    value = "" + i;
+                    value = "" + j;
                 }
 
-                organizedDeck.add(new Card(suit, value, true));
+                orderedDeck.add(new Card(suit, value, true));
             }
+        }
+
+        for (Card card : orderedDeck){
+            System.out.println(card.cardInfo());
         }
 
         //shuffle deck
         ArrayList<Card> shuffledDeck = new ArrayList<>();
-        while (organizedDeck.size() > 0){
-            int randInd = (int) (Math.random() * organizedDeck.size());
-            shuffledDeck.add(organizedDeck.remove(randInd));
+        while (orderedDeck.size() > 0){
+            int randInd = (int) (Math.random() * orderedDeck.size());
+            shuffledDeck.add(orderedDeck.remove(randInd));
         }
+
+
 
         //set up the tableau stacks
         tableau = new TableauStack[7];
-        for (int i = 0; i < 7; i ++){
+        for (int i = 1; i <= 7; i ++){
             ArrayList<Card> stackToAdd = new ArrayList<>();
             for (int j = 0; j < i; j ++){
                 Card cardToMove = shuffledDeck.remove(shuffledDeck.size() - 1);
@@ -72,7 +78,7 @@ public class SolitaireGame {
                 }
                 stackToAdd.add(cardToMove);
             }
-            tableau[i] = new TableauStack(stackToAdd);
+            tableau[i - 1] = new TableauStack(stackToAdd);
         }
     }
 
@@ -115,7 +121,5 @@ public class SolitaireGame {
 
         return toDisplay;
     }
-
-
 
 }

@@ -49,7 +49,7 @@ public class Card {
     }
 
    public String cardInfo(){
-        return getValue() + getSuit();
+        return getSuit() + getValue();
    }
 
    public String getColor(){
