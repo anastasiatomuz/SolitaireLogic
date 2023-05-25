@@ -53,7 +53,7 @@ public class Card {
    }
 
    public String getColor(){
-        if (suit.equals("♦") || suit.equals("♥")){
+        if (suit.equals("d") || suit.equals("h")){
             return "red";
         }
         return "black";

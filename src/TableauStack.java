@@ -45,6 +45,16 @@ public class TableauStack {
         return resultingCard;
     }
 
+    public void removeMultipleCards(int locFromTop){
+        int startFrom = stack.size() - locFromTop;
+        while (startFrom < stack.size()){
+            stack.remove(startFrom);
+        }
+        if (stack.size() != 0 && !getTopCard().isVisible()){
+            getTopCard().flip();
+        }
+    }
+
     public Card getTopCard(){
         return stack.get(stack.size() - 1);
     }
@@ -60,6 +70,7 @@ public class TableauStack {
         //the card that will be used to determine if the multiple cards can be moved to a new Tableau stack
         Card mainCard = cardsToAdd.get(0);
         if (addOneCard(mainCard)){
+            cardsToAdd.remove(0);
             stack.addAll(cardsToAdd);
             return true;
         } else {
@@ -94,5 +105,9 @@ public class TableauStack {
             }
         }
         return toDisplay;
+    }
+
+    public Card getBottomCardOfSet(int locFromTop){
+        return stack.get(stack.size() - locFromTop);
     }
 }
