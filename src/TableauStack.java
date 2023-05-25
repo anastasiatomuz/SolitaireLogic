@@ -4,13 +4,14 @@ public class TableauStack {
 
     private ArrayList<Card> stack;
 
-    public TableauStack(){
-        stack = new ArrayList<>();
+    public TableauStack(ArrayList<Card> stackToAdd){
+        stack = stackToAdd;
     }
 
     public ArrayList<Card> getStack(){
         return stack;
     }
+
 
     public boolean addOneCard(Card newCard){
         //if stack is currently empty, can only add a card of value King
@@ -18,6 +19,8 @@ public class TableauStack {
             if (newCard.getValue().equals("K")){
                 stack.add(newCard);
                 return true;
+            } else {
+                return false;
             }
         }
 
@@ -30,11 +33,16 @@ public class TableauStack {
                 return true;
             }
         }
+
         return false;
     }
 
     public Card removeTopCard(){
-        return stack.remove(stack.size() - 1);
+        Card resultingCard = stack.remove(stack.size() - 1);
+        if (stack.size() != 0 && !getTopCard().isVisible()){
+            getTopCard().flip();
+        }
+        return resultingCard;
     }
 
     public Card getTopCard(){
@@ -74,5 +82,17 @@ public class TableauStack {
             toReturn.add(stack.get(i));
         }
         return toReturn;
+    }
+
+    public String displayStack(){
+        String toDisplay = "";
+        for (Card card : stack){
+            if (card.isVisible()){
+                toDisplay += card.cardInfo() + " ";
+            } else {
+                toDisplay += "XX  ";
+            }
+        }
+        return toDisplay;
     }
 }

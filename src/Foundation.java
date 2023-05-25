@@ -47,6 +47,7 @@ public class Foundation {
         if (foundationStack.size() == 0) {
             if (newCard.getValue().equals("A")) {
                 foundationStack.add(newCard);
+                return true;
             } else {
                 return false;
             }
@@ -59,4 +60,6 @@ public class Foundation {
         }
         return false;
     }
+
+
 }
